@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Connor">
 <meta property="og:description" content="素数筛法朴素算法复杂度：$O(n\sqrt n)$介绍​    这个算法是最简单的素数判断算法+遍历素组，耗时长，如果n很小的话，这种算法不会耗时很多。但是当n很大的时候，数量级相当大。 代码12345678int prime(int n)&amp;#123;    for(int i=2;i*i&amp;lt;=n;i++)&amp;#123;        if((n%i)==0)            return">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-26T03:48:55.820Z">
+<meta property="og:updated_time" content="2019-01-26T04:01:51.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="素数筛法">
 <meta name="twitter:description" content="素数筛法朴素算法复杂度：$O(n\sqrt n)$介绍​    这个算法是最简单的素数判断算法+遍历素组，耗时长，如果n很小的话，这种算法不会耗时很多。但是当n很大的时候，数量级相当大。 代码12345678int prime(int n)&amp;#123;    for(int i=2;i*i&amp;lt;=n;i++)&amp;#123;        if((n%i)==0)            return">
@@ -393,7 +393,7 @@
                 
               
 
-              <time title="创建时间：2019-01-26 10:51:48 / 修改时间：11:48:55" itemprop="dateCreated datePublished" datetime="2019-01-26T10:51:48+08:00">2019-01-26</time>
+              <time title="创建时间：2019-01-26 10:51:48 / 修改时间：12:01:51" itemprop="dateCreated datePublished" datetime="2019-01-26T10:51:48+08:00">2019-01-26</time>
             
 
             
@@ -471,8 +471,8 @@
 <p>设合数 $n=p_1∗p_2∗p_3∗_4∗…∗p_n(p_1≤p_2≤p_3≤p_4≤…≤p_n)$</p>
 <ol>
 <li>因为 $i$ 是从 $1$ 到 $N$ 循环的,所以肯定先访问 $n′=p_2∗p_3∗_4∗…∗p_n$ , 又因为 $p_1≤p_2$ ，所以在访问 $n′$ 的时候 $p_1∗n′$ 是一定执行的，由此我们可以得出所有的合数都会被标记过. </li>
-<li>只要当前的 $i$ % $prime[j]=0$ 就会退出循环， $prime[j]$  也是从小到大循环的，所以合数 $n$ 只会在 $i=n′=p_2∗p_3∗p_4∗…∗p_n$ 的时候被筛掉</li>
-<li>在 $i&lt;n′$  时，有可能满足条件的 $i′=n′=\frac{p_1∗p_2∗p_3∗p_4∗…∗p_n} {p_k}(2≤k≤n)$ ，此时 $prime<a href="=p_k"></a>∗i′$ 可以把 $n$ 筛除，而根据[2.]，在 $prime[ ]=p_1$ 时就break跳出出循环了，故一个合数 $n$ 都会被筛除且只筛一遍。</li>
+<li>只要当前的 $i​$ % $prime[j]=0​$ 就会退出循环， $prime[j]​$  也是从小到大循环的，所以合数 $n​$ 只会在 $i=n′=p_2∗p_3∗p_4∗…∗p_n​$ 的时候被筛掉</li>
+<li>在 $i&lt;n′​$  时，有可能满足条件的 $i′=n′=\frac{p_1∗p_2∗p_3∗p_4∗…∗p_n} {p_k}(2≤k≤n)​$ ，此时 $prime[∗] (=p_k)∗i’​$ 可以把 $n​$ 筛除，而根据[2.]，在 $prime[∗]=p_1​$ 时就break跳出出循环了，故一个合数 $n​$ 都会被筛除且只筛一遍。</li>
 </ol>
 
       
