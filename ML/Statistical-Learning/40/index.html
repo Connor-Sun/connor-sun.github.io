@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
+  <meta name="description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 <meta name="keywords" content="机器学习,统计学习方法,决策树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="050_Dicision_Tree">
 <meta property="og:url" content="http://connor-sun.github.io/ML/Statistical-Learning/40/index.html">
 <meta property="og:site_name" content="Connor">
-<meta property="og:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
+<meta property="og:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-06T10:14:41.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="050_Dicision_Tree">
-<meta name="twitter:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
+<meta name="twitter:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 
 
 
@@ -497,26 +497,34 @@
 <h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><p>直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。</p>
 <p>信息增益，就能很好的表示这一直观的准则。</p>
 <h3 id="熵-entropy"><a href="#熵-entropy" class="headerlink" title="熵 entropy"></a>熵 entropy</h3><p>表示随机变量不确定性的度量</p>
-<p>设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为<br>$$<br>P(X = x_i) = p_i,\ \ \ \ i=1,2,\ldots,n<br>$$<br>则随机变量 $X$ 的熵定义为<br>$$<br>H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.1}\label{entropy1}<br>$$<br>在式 $ \eqref{entropy1} $ 中，若 $ p_i=0 $，则定义 $ 0\log 0 = 0 $。通常式 $ \eqref{entropy1} $ 中对数以 $ 2 $ 或 $ e $ 为底 。</p>
-<p>由定义可知，$ X $ 的熵只依赖于 $ X $ 的分布，而与 $ X $ 的取值无关，因此也可将 $ X $ 的熵记为 $ H(p)$ ，即<br>$$<br>H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.2}\label{entropy2}<br>$$<br>从定义可验证<br>$$<br>0\le H(p) \le \log n \tag{5.3}<br>$$</p>
-<h3 id="条件熵-conditional-entropy"><a href="#条件熵-conditional-entropy" class="headerlink" title="条件熵 conditional entropy"></a>条件熵 conditional entropy</h3><p>$$<br>H(Y|X) = \sum_{i=1}^n p_i H(Y|X=x_i) \tag{5.4}<br>$$</p>
-<p>当熵和条件熵中的概率有数据估计（特别是极大似然估计）得到时，对应的熵与条件熵分别成为经验熵（empirical entropy）和经验条件熵（empirical conditional entropy）。</p>
-<h3 id="信息增益-information-gain"><a href="#信息增益-information-gain" class="headerlink" title="信息增益 information gain"></a>信息增益 information gain</h3><p>信息增益表示得知特征 $ X $ 的信息是类 $ Y $ 的信息不确定性减少的程度。<br>$$<br>g(D,A) = H(D)-H(D|A) \tag{5.5}<br>$$</p>
-<ul>
+<p>设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为</p>
+<script type="math/tex; mode=display">
+P(X = x_i) = p_i,\ \ \ \ i=1,2,\ldots,n</script><p>则随机变量 $X$ 的熵定义为</p>
+<script type="math/tex; mode=display">
+H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.1}\label{entropy1}</script><p>在式 $ \eqref{entropy1} $ 中，若 $ p_i=0 $，则定义 $ 0\log 0 = 0 $。通常式 $ \eqref{entropy1} $ 中对数以 $ 2 $ 或 $ e $ 为底 。</p>
+<p>由定义可知，$ X $ 的熵只依赖于 $ X $ 的分布，而与 $ X $ 的取值无关，因此也可将 $ X $ 的熵记为 $ H(p)$ ，即</p>
+<script type="math/tex; mode=display">
+H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.2}\label{entropy2}</script><p>从定义可验证</p>
+<script type="math/tex; mode=display">
+0\le H(p) \le \log n \tag{5.3}</script><h3 id="条件熵-conditional-entropy"><a href="#条件熵-conditional-entropy" class="headerlink" title="条件熵 conditional entropy"></a>条件熵 conditional entropy</h3><script type="math/tex; mode=display">
+H(Y|X) = \sum_{i=1}^n p_i H(Y|X=x_i) \tag{5.4}</script><p>当熵和条件熵中的概率有数据估计（特别是极大似然估计）得到时，对应的熵与条件熵分别成为经验熵（empirical entropy）和经验条件熵（empirical conditional entropy）。</p>
+<h3 id="信息增益-information-gain"><a href="#信息增益-information-gain" class="headerlink" title="信息增益 information gain"></a>信息增益 information gain</h3><p>信息增益表示得知特征 $ X $ 的信息是类 $ Y $ 的信息不确定性减少的程度。</p>
+<script type="math/tex; mode=display">
+g(D,A) = H(D)-H(D|A) \tag{5.5}</script><ul>
 <li><p><strong>缺点</strong>：信息增益偏向取值较多的特征</p>
 </li>
 <li><p><strong>原因</strong>：当特征的取值较多时，根据此特征划分更容易得到纯度更高的子集，因此划分之后的熵更低，由于划分前的熵是一定的，因此信息增益更大，因此信息增益比较偏向取值较多的特征。</p>
 </li>
 </ul>
-<h3 id="信息增益比-information-gain-ratio"><a href="#信息增益比-information-gain-ratio" class="headerlink" title="信息增益比 information gain ratio"></a>信息增益比 information gain ratio</h3><p>$$<br>g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}<br>$$</p>
-<ul>
+<h3 id="信息增益比-information-gain-ratio"><a href="#信息增益比-information-gain-ratio" class="headerlink" title="信息增益比 information gain ratio"></a>信息增益比 information gain ratio</h3><script type="math/tex; mode=display">
+g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}</script><ul>
 <li><p>信息增益比本质： 是在信息增益的基础之上乘上一个惩罚参数。特征个数较多时，惩罚参数较小；特征个数较少时，惩罚参数较大。</p>
 </li>
 <li><p>惩罚参数：数据集D以特征A作为随机变量的熵的倒数，即：将特征A取值相同的样本划分到同一个子集中（之前所说数据集的熵是依据类别进行划分的）</p>
 </li>
 </ul>
-<p>$$<br>惩罚参数 = \frac {1} {H_A(D)} = \frac {1} { -\sum_{i=1}^n \frac{|D_i|} {|D|} \log_2 \frac {|D_i|} {|D|} }<br>$$</p>
-<p><strong>缺点</strong>：信息增益比偏向取值较少的特征   </p>
+<script type="math/tex; mode=display">
+惩罚参数 = \frac {1} {H_A(D)} = \frac {1} { -\sum_{i=1}^n \frac{|D_i|} {|D|} \log_2 \frac {|D_i|} {|D|} }</script><p><strong>缺点</strong>：信息增益比偏向取值较少的特征   </p>
 <p><strong>原因：</strong>  当特征取值较少时HA(D)的值较小，因此其倒数较大，因而信息增益比较大。因而偏向取值较少的特征。</p>
 <p><strong>使用信息增益比：</strong>并不是直接选择信息增益率最大的特征，也不是选择信息增益比最大的特征；而是现在候选特征中找出信息增益高于平均水平的特征，然后在这些特征中再选择信息增益率最高的特征。   </p>
 
