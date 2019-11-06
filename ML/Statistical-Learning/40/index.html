@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="题目##　1006 换个格式输出整数 （15 分） 让我们用字母 B 来表示“百”、字母 S 表示“十”，用 12...n 来表示不为零的个位数字 n（&amp;lt;10），换个格式来输出任一个不超过 3 位的正整数。例如 234应该被输出为 BBSSS1234，因为它有 2 个“百”、3 个“十”、以及个位的 4。 输入格式：每个测试输入包含 1 个测试用例，给出正整数 n（&amp;lt;1000）。 输出">
-<meta name="keywords" content="编程,C++,PAT-Basic-Level">
+  <meta name="description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
+<meta name="keywords" content="机器学习,统计学习方法,决策树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PAT_Basic_1006_换个格式输出整数">
-<meta property="og:url" content="http://connor-sun.github.io/PAT/PAT-Basic-Level/1006/index.html">
+<meta property="og:title" content="050_Dicision_Tree">
+<meta property="og:url" content="http://connor-sun.github.io/ML/Statistical-Learning/40/index.html">
 <meta property="og:site_name" content="Connor">
-<meta property="og:description" content="题目##　1006 换个格式输出整数 （15 分） 让我们用字母 B 来表示“百”、字母 S 表示“十”，用 12...n 来表示不为零的个位数字 n（&amp;lt;10），换个格式来输出任一个不超过 3 位的正整数。例如 234应该被输出为 BBSSS1234，因为它有 2 个“百”、3 个“十”、以及个位的 4。 输入格式：每个测试输入包含 1 个测试用例，给出正整数 n（&amp;lt;1000）。 输出">
+<meta property="og:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-24T06:22:09.555Z">
+<meta property="og:updated_time" content="2019-11-06T10:13:00.097Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PAT_Basic_1006_换个格式输出整数">
-<meta name="twitter:description" content="题目##　1006 换个格式输出整数 （15 分） 让我们用字母 B 来表示“百”、字母 S 表示“十”，用 12...n 来表示不为零的个位数字 n（&amp;lt;10），换个格式来输出任一个不超过 3 位的正整数。例如 234应该被输出为 BBSSS1234，因为它有 2 个“百”、3 个“十”、以及个位的 4。 输入格式：每个测试输入包含 1 个测试用例，给出正整数 n（&amp;lt;1000）。 输出">
+<meta name="twitter:title" content="050_Dicision_Tree">
+<meta name="twitter:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为$$P(X = x_i">
 
 
 
 
 
 
-  <link rel="canonical" href="http://connor-sun.github.io/PAT/PAT-Basic-Level/1006/">
+  <link rel="canonical" href="http://connor-sun.github.io/ML/Statistical-Learning/40/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>PAT_Basic_1006_换个格式输出整数 | Connor</title>
+  <title>050_Dicision_Tree | Connor</title>
   
 
 
@@ -362,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://connor-sun.github.io/PAT/PAT-Basic-Level/1006/">
+    <link itemprop="mainEntityOfPage" href="http://connor-sun.github.io/ML/Statistical-Learning/40/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Connor">
@@ -379,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PAT_Basic_1006_换个格式输出整数
+          <h1 class="post-title" itemprop="name headline">050_Dicision_Tree
 
               
             
@@ -405,12 +405,24 @@
                 
               
 
-              <time title="创建时间：2019-01-24 13:52:32 / 修改时间：14:22:09" itemprop="dateCreated datePublished" datetime="2019-01-24T13:52:32+08:00">2019-01-24</time>
+              <time title="创建时间：2019-11-05 15:47:10" itemprop="dateCreated datePublished" datetime="2019-11-05T15:47:10+08:00">2019-11-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-06 18:13:00" itemprop="dateModified" datetime="2019-11-06T18:13:00+08:00">2019-11-06</time>
               
             
           </span>
@@ -427,14 +439,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PAT/PAT-Basic-Level/" itemprop="url" rel="index"><span itemprop="name">PAT-Basic-Level</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/ML/Statistical-Learning/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
 
                 
                 
@@ -449,7 +461,7 @@
 
           
           
-            <span id="/PAT/PAT-Basic-Level/1006/" class="leancloud_visitors" data-flag-title="PAT_Basic_1006_换个格式输出整数">
+            <span id="/ML/Statistical-Learning/40/" class="leancloud_visitors" data-flag-title="050_Dicision_Tree">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -480,15 +492,33 @@
       
 
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>##　1006 换个格式输出整数 （15 分）</p>
-<p>让我们用字母 <code>B</code> 来表示“百”、字母 <code>S</code> 表示“十”，用 <code>12...n</code> 来表示不为零的个位数字 <code>n</code>（&lt;10），换个格式来输出任一个不超过 3 位的正整数。例如 <code>234</code>应该被输出为 <code>BBSSS1234</code>，因为它有 2 个“百”、3 个“十”、以及个位的 4。</p>
-<h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>每个测试输入包含 1 个测试用例，给出正整数 <em>n</em>（&lt;1000）。</p>
-<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>每个测试用例的输出占一行，用规定的格式输出 <em>n</em>。</p>
-<h2 id="输入样例-1："><a href="#输入样例-1：" class="headerlink" title="输入样例 1："></a>输入样例 1：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">234</span><br></pre></td></tr></table></figure>
-<h2 id="输出样例-1："><a href="#输出样例-1：" class="headerlink" title="输出样例 1："></a>输出样例 1：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BBSSS1234</span><br></pre></td></tr></table></figure>
-<h2 id="输入样例-2："><a href="#输入样例-2：" class="headerlink" title="输入样例 2："></a>输入样例 2：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">23</span><br></pre></td></tr></table></figure>
-<h2 id="输出样例-2："><a href="#输出样例-2：" class="headerlink" title="输出样例 2："></a>输出样例 2：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SS123</span><br></pre></td></tr></table></figure>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span> b, <span class="keyword">int</span> s, <span class="keyword">int</span> g)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>, s = <span class="number">0</span>, g = <span class="number">0</span>;</span><br><span class="line">    b = n / <span class="number">100</span>;</span><br><span class="line">    s = (n % <span class="number">100</span>) / <span class="number">10</span>;</span><br><span class="line">    g = n % <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    output(b, s, g);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span> b, <span class="keyword">int</span> s, <span class="keyword">int</span> g)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (b--)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span>;</span><br><span class="line">    <span class="keyword">while</span> (s--)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"S"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= g; ++i) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><p>特征选择、决策树的生成</p>
+<p>决策树的剪枝过程 减少过拟合的情况</p>
+<h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><p>直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。</p>
+<p>信息增益，就能很好的表示这一直观的准则。</p>
+<h3 id="熵-entropy"><a href="#熵-entropy" class="headerlink" title="熵 entropy"></a>熵 entropy</h3><p>表示随机变量不确定性的度量</p>
+<p>设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为<br>$$<br>P(X = x_i) = p_i,\ \ \ \ i=1,2,\ldots,n<br>$$<br>则随机变量 $X$ 的熵定义为<br>$$<br>H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.1}\label{entropy1}<br>$$<br>在式 $ \eqref{entropy1} $ 中，若 $ p_i=0 $，则定义 $ 0\log 0 = 0 $。通常式 $ \eqref{entropy1} $ 中对数以 $ 2 $ 或 $ e $ 为底 。</p>
+<p>由定义可知，$ X $ 的熵只依赖于 $ X $ 的分布，而与 $ X $ 的取值无关，因此也可将 $ X $ 的熵记为 $ H(p)$ ，即<br>$$<br>H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.2}\label{entropy2}<br>$$<br>从定义可验证<br>$$<br>0\le H(p) \le \log n \tag{5.3}<br>$$</p>
+<h3 id="条件熵-conditional-entropy"><a href="#条件熵-conditional-entropy" class="headerlink" title="条件熵 conditional entropy"></a>条件熵 conditional entropy</h3><p>$$<br>H(Y|X) = \sum_{i=1}^n p_i H(Y|X=x_i) \tag{5.4}<br>$$</p>
+<p>当熵和条件熵中的概率有数据估计（特别是极大似然估计）得到时，对应的熵与条件熵分别成为经验熵（empirical entropy）和经验条件熵（empirical conditional entropy）。</p>
+<h3 id="信息增益-information-gain"><a href="#信息增益-information-gain" class="headerlink" title="信息增益 information gain"></a>信息增益 information gain</h3><p>信息增益表示得知特征 $ X $ 的信息是类 $ Y $ 的信息不确定性减少的程度。<br>$$<br>g(D,A) = H(D)-H(D|A) \tag{5.5}<br>$$</p>
+<ul>
+<li><p><strong>缺点</strong>：信息增益偏向取值较多的特征</p>
+</li>
+<li><p><strong>原因</strong>：当特征的取值较多时，根据此特征划分更容易得到纯度更高的子集，因此划分之后的熵更低，由于划分前的熵是一定的，因此信息增益更大，因此信息增益比较偏向取值较多的特征。</p>
+</li>
+</ul>
+<h3 id="信息增益比-information-gain-ratio"><a href="#信息增益比-information-gain-ratio" class="headerlink" title="信息增益比 information gain ratio"></a>信息增益比 information gain ratio</h3><p>$$<br>g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}<br>$$</p>
+<ul>
+<li><p>信息增益比本质： 是在信息增益的基础之上乘上一个惩罚参数。特征个数较多时，惩罚参数较小；特征个数较少时，惩罚参数较大。</p>
+</li>
+<li><p>惩罚参数：数据集D以特征A作为随机变量的熵的倒数，即：将特征A取值相同的样本划分到同一个子集中（之前所说数据集的熵是依据类别进行划分的）</p>
+</li>
+</ul>
+<p>$$<br>惩罚参数 = \frac {1} {H_A(D)} = \frac {1} { -\sum_{i=1}^n \frac{|D_i|} {|D|} \log_2 \frac {|D_i|} {|D|} }<br>$$</p>
+<p><strong>缺点</strong>：信息增益比偏向取值较少的特征   </p>
+<p><strong>原因：</strong>  当特征取值较少时HA(D)的值较小，因此其倒数较大，因而信息增益比较大。因而偏向取值较少的特征。</p>
+<p><strong>使用信息增益比：</strong>并不是直接选择信息增益率最大的特征，也不是选择信息增益比最大的特征；而是现在候选特征中找出信息增益高于平均水平的特征，然后在这些特征中再选择信息增益率最高的特征。   </p>
 
       
     </div>
@@ -512,11 +542,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/programming/" rel="tag"># 编程</a>
+            <a href="/tags/ML/" rel="tag"># 机器学习</a>
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/Statistical-Learning/" rel="tag"># 统计学习方法</a>
           
-            <a href="/tags/PAT-Basic-Level/" rel="tag"># PAT-Basic-Level</a>
+            <a href="/tags/Decision-Tree/" rel="tag"># 决策树</a>
           
         </div>
       
@@ -529,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/PAT/PAT-Basic-Level/1005/" rel="next" title="PAT_Basic_1005_继续(3n+1)猜想">
-                <i class="fa fa-chevron-left"></i> PAT_Basic_1005_继续(3n+1)猜想
+              <a href="/ML/Statistical-Learning/8/" rel="next" title="010_Introduction">
+                <i class="fa fa-chevron-left"></i> 010_Introduction
               </a>
             
           </div>
@@ -538,10 +568,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/PAT/PAT-Basic-Level/1007/" rel="prev" title="PAT_Basic_1007_素数对猜想">
-                PAT_Basic_1007_素数对猜想 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -709,7 +735,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式："><span class="nav-number">1.1.</span> <span class="nav-text">输入格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式："><span class="nav-number">1.2.</span> <span class="nav-text">输出格式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入样例-1："><span class="nav-number">1.3.</span> <span class="nav-text">输入样例 1：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出样例-1："><span class="nav-number">1.4.</span> <span class="nav-text">输出样例 1：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入样例-2："><span class="nav-number">1.5.</span> <span class="nav-text">输入样例 2：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出样例-2："><span class="nav-number">1.6.</span> <span class="nav-text">输出样例 2：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">1.1.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵-entropy"><span class="nav-number">1.1.1.</span> <span class="nav-text">熵 entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件熵-conditional-entropy"><span class="nav-number">1.1.2.</span> <span class="nav-text">条件熵 conditional entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益-information-gain"><span class="nav-number">1.1.3.</span> <span class="nav-text">信息增益 information gain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益比-information-gain-ratio"><span class="nav-number">1.1.4.</span> <span class="nav-text">信息增益比 information gain ratio</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
