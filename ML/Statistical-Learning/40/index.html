@@ -99,14 +99,14 @@
   <meta name="description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 <meta name="keywords" content="机器学习,统计学习方法,决策树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="050_Dicision_Tree">
+<meta property="og:title" content="050_Decision_Tree">
 <meta property="og:url" content="http://connor-sun.github.io/ML/Statistical-Learning/40/index.html">
 <meta property="og:site_name" content="Connor">
 <meta property="og:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-06T10:30:17.221Z">
+<meta property="og:updated_time" content="2019-11-08T08:06:14.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="050_Dicision_Tree">
+<meta name="twitter:title" content="050_Decision_Tree">
 <meta name="twitter:description" content="决策树特征选择、决策树的生成 决策树的剪枝过程 减少过拟合的情况 特征选择直观上，如果一个特征具有更好的分类能力，或者说通过这一特征将训练数据分类成不同的子集，各个子集在当前条件下有最好的分类，那么我们认为选择这个特征比较合适。 信息增益，就能很好的表示这一直观的准则。 熵 entropy表示随机变量不确定性的度量 设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为  P(X = x_i">
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>050_Dicision_Tree | Connor</title>
+  <title>050_Decision_Tree | Connor</title>
   
 
 
@@ -310,7 +310,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
 
   </li>
 
@@ -379,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">050_Dicision_Tree
+          <h1 class="post-title" itemprop="name headline">050_Decision_Tree
 
               
             
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-06 18:30:17" itemprop="dateModified" datetime="2019-11-06T18:30:17+08:00">2019-11-06</time>
+                <time title="修改时间：2019-11-08 16:06:14" itemprop="dateModified" datetime="2019-11-08T16:06:14+08:00">2019-11-08</time>
               
             
           </span>
@@ -461,7 +461,7 @@
 
           
           
-            <span id="/ML/Statistical-Learning/40/" class="leancloud_visitors" data-flag-title="050_Dicision_Tree">
+            <span id="/ML/Statistical-Learning/40/" class="leancloud_visitors" data-flag-title="050_Decision_Tree">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -499,12 +499,12 @@
 <h3 id="熵-entropy"><a href="#熵-entropy" class="headerlink" title="熵 entropy"></a>熵 entropy</h3><p>表示随机变量不确定性的度量</p>
 <p>设 $ X $ 是一个区有限个值的离散随机变量，其概率分布为</p>
 <script type="math/tex; mode=display">
-P(X = x_i) = p_i,\ \ \ \ i=1,2,\ldots,n</script><p>则随机变量 $X$ 的熵定义为</p>
+P(X = x_i) = p_i,\quad i=1,2,\ldots,n</script><p>则随机变量 $X$ 的熵定义为</p>
 <script type="math/tex; mode=display">
-H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.1}\label{entropy1}</script><p>在式 $ \eqref{entropy1} $ 中，若 $ p_i=0 $，则定义 $ 0\log 0 = 0 $。通常式 $ \eqref{entropy1} $ 中对数以 $ 2 $ 或 $ e $ 为底 。</p>
+H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.1}</script><p>在式 $(5.1)$ 中，若 $ p_i=0 $，则定义 $ 0\log 0 = 0 $。通常式 $(5.1)$ 中对数以 $ 2 $ 或 $ e $ 为底 。</p>
 <p>由定义可知，$ X $ 的熵只依赖于 $ X $ 的分布，而与 $ X $ 的取值无关，因此也可将 $ X $ 的熵记为 $ H(p)$ ，即</p>
 <script type="math/tex; mode=display">
-H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.2}\label{entropy2}</script><p>从定义可验证</p>
+H(X) = -\sum_{i=1}^np_i\log p_i\tag{5.2}</script><p>从定义可验证</p>
 <script type="math/tex; mode=display">
 0\le H(p) \le \log n \tag{5.3}</script><h3 id="条件熵-conditional-entropy"><a href="#条件熵-conditional-entropy" class="headerlink" title="条件熵 conditional entropy"></a>条件熵 conditional entropy</h3><script type="math/tex; mode=display">
 H(Y|X) = \sum_{i=1}^n p_i H(Y|X=x_i) \tag{5.4}</script><p>当熵和条件熵中的概率有数据估计（特别是极大似然估计）得到时，对应的熵与条件熵分别成为经验熵（empirical entropy）和经验条件熵（empirical conditional entropy）。</p>
@@ -524,9 +524,101 @@ g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}</script><ul>
 </li>
 </ul>
 <script type="math/tex; mode=display">
-惩罚参数 = \frac {1} {H_A(D)} = \frac {1} { -\sum_{i=1}^n \frac{|D_i|} {|D|} \log_2 \frac {|D_i|} {|D|} }</script><p><strong>缺点</strong>：信息增益比偏向取值较少的特征   </p>
+惩罚参数 = \frac {1} {H_A(D)} = \frac {1} { -\sum_{i=1}^n \frac{|D_i|} {|D|} \log_2 \frac {|D_i|} {|D|} } \tag{5.7}</script><p><strong>缺点</strong>：信息增益比偏向取值较少的特征   </p>
 <p><strong>原因：</strong>  当特征取值较少时HA(D)的值较小，因此其倒数较大，因而信息增益比较大。因而偏向取值较少的特征。</p>
 <p><strong>使用信息增益比：</strong>并不是直接选择信息增益率最大的特征，也不是选择信息增益比最大的特征；而是现在候选特征中找出信息增益高于平均水平的特征，然后在这些特征中再选择信息增益率最高的特征。   </p>
+<h2 id="算法5-1-ID3-算法"><a href="#算法5-1-ID3-算法" class="headerlink" title="算法5.1: ID3 算法"></a>算法5.1: ID3 算法</h2><ul>
+<li><strong>Input</strong>:        Training data set $D$, feature set $A$, threshold value  $\epsilon$;</li>
+<li><strong>Output</strong>:    Decision tree T. </li>
+</ul>
+<ol>
+<li>If each $x\in D$ belong to the same class $ C_k $, then $T$ is a single node tree and class $C_k$ is used as class label for the node, return $T$;</li>
+<li>If $A=\varnothing$, then $T$ is a single node tree and set the maximum number of class $C_k$ is used as class label for the node, return $T$;</li>
+<li>Otherwise, calculate $g(D,A)$ by each character $A$ based on $(5.5)$, $A_g=\max(A_g,g(D,A_g))$;</li>
+<li>If $g(D,A_g) &lt; \epsilon$, then set $T$ as a single tree node and set the maximum number of class $C_k$ is used as class label for the node, return $T$;</li>
+<li>Otherwise, for each $A_g=a_i$ ,divide $D$ to several non-empty subset $D_i$  and set the maximum number of class $C_k$ is used as class label for the node, constitute current node and its children as tree $T$, return $T$;</li>
+<li>For $ i $ th child node, use $D_i$ as training set, $A-{A_g}$ as feature set, recursive call 1. ~ 5. , get the subtree $T_i$, return $T_i$. </li>
+</ol>
+<h2 id="Algorithm-5-2-C4-5"><a href="#Algorithm-5-2-C4-5" class="headerlink" title="Algorithm 5.2: C4.5"></a>Algorithm 5.2: C4.5</h2><ul>
+<li>5.1  $g(D,A_g) \to g_R(D,A_g)$</li>
+<li></li>
+</ul>
+<h2 id="Algorithm-5-3-Decision-Tree-Pruning"><a href="#Algorithm-5-3-Decision-Tree-Pruning" class="headerlink" title="Algorithm 5.3: Decision Tree Pruning"></a>Algorithm 5.3: Decision Tree Pruning</h2><ul>
+<li><strong>Input</strong>:         Full  tree $T$, parameter $\alpha$;</li>
+<li><strong>Output</strong>:      Subtree $T_\alpha$ after pruning.</li>
+</ul>
+<ol>
+<li><p>Calculate $H_t(T)$ of each node;</p>
+</li>
+<li><p>Recursive retract upward from the leaf node of the tree, </p>
+<ul>
+<li>Tree before retract: $T_B$;</li>
+<li>Tree after retract: $T_A$;</li>
+</ul>
+<p>if $ C_\alpha (T_B) \le C_\alpha (T_A) $, then prune the tree, soon the parent node becomes the new leaf node;</p>
+</li>
+<li><p>back to $2.$, until can’t continue, get $C_\alpha(T)$ and smallest subtree $T_\alpha$. </p>
+</li>
+</ol>
+<h1 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a>CART算法</h1><p>分类与回归树 classification and regression tree</p>
+<p>由以下两步组成:</p>
+<blockquote>
+<p>(1)决策树生成：基于训练数据集生成决策树，要尽量大；</p>
+<p>(2)决策树剪枝：用验证数据集对决策树进行剪枝并选择最优子树，这是用损失函数最小作为剪枝标准。</p>
+</blockquote>
+<h2 id="CART生成"><a href="#CART生成" class="headerlink" title="CART生成"></a>CART生成</h2><h3 id="1-回归树的生成"><a href="#1-回归树的生成" class="headerlink" title="1. 回归树的生成"></a>1. 回归树的生成</h3><p>​    假设 $X$ 与 $Y$ 分别为输入和输出变量，并且 $Y$ 是连续变量，训练数据集</p>
+<script type="math/tex; mode=display">
+D = \{(x_1,y_1), (x_2,y_2), \ldots , (x_N,y_N)\}</script><p>假设已将输入空间划分为 $M$ 个单元 $R_1,R_2,\ldots,R_M$，并且在每个单元 $R_m$ 上有一个固定的输出值 $c_m$，于是回归树模型可以表示为</p>
+<script type="math/tex; mode=display">
+f(x) = \sum_{m=1}^M c_m I(x\in R_m)</script><p>​    当输入空间划分确定时，可以用平方误差 $M(f(x_i) =\sum\limits_{x_i \in R_m} (y_i-f(x_i))^2$ 来表示回归树对于训练数据的预测误差，用平方误差最小的准则求解每个单元上的最优输出值。求极小值可知， $y_i$ 的均值为 $c_m$最优值</p>
+<script type="math/tex; mode=display">
+令 \frac{\partial M}{\partial f(x_i)} = 2\sum_{x_i \in R_m} (f(x_i)-y_i)=0 \\
+f(x_i) = ave(y_i|x_i \in R_m)</script><ul>
+<li><p>切分变量 splitting variable：第 $j$ 个变量 $x^{(j)}$ </p>
+</li>
+<li><p>切分点 splitting point：$x^{(j)}$ 的值 $s$</p>
+</li>
+</ul>
+<p>定义两个区域：</p>
+<script type="math/tex; mode=display">
+R_1(j,s) = \{x|x^{(j)} \le s\} \quad 和 \quad R_2(j,s) = \{x|x^{(j)} > s\}</script><p>对固定的输入变量 $j$ 可以找到最优切分点 $s$。</p>
+<script type="math/tex; mode=display">
+\min_{j,s} \left[ \min_{c_1} \sum_{x_i\in R_1(j,s)} (y_i-c_1)^2 + \min_{c_2} \sum_{x_i\in R_2(j,s)} (y_i-c_2)^2 \right] \\
+\hat{c}_1 = ave(y_i|x_i\in R_1(j,s))\quad \& \quad\hat{c}_2 = ave(y_i|x_i\in R_2(j,s))</script><p>遍历所有变量，找到最优切分变量 $j$ 及其对应的最优切分点 $s$。将输入空间切分为两个区域，并对每个区域重复上述步骤，知道满足停止条件。</p>
+<h3 id="2-分类树的生成"><a href="#2-分类树的生成" class="headerlink" title="2. 分类树的生成"></a>2. 分类树的生成</h3><p>基尼指数</p>
+<script type="math/tex; mode=display">
+{\rm Gini}(p) = \sum_{k=1}^K p_k(1-p_k) = 1 - \sum_{k=1}^K p_k^2</script><script type="math/tex; mode=display">
+{\rm Gini}(D) = 1 - \sum_{k=1}^K \left(\frac{|C_k|}{|D|}\right)^2 \\
+{\rm Gini}(D,A)= \frac{|D_1|}{|D|} {\rm Gini}(D_1) + \frac{|D_2|}{|D|} {\rm Gini}(D_2)</script><p>基尼指数 ${\rm Gini}(D)$ 表示集合 $D$ 的不确定性，基尼指数 ${\rm Gini}(D,A)$ 表示经 $A=a$  分割后集合 $D$ 的不确定性。</p>
+<p>根据训练数据集，从根结点开始，递归地对每个结点进行以下操作，构建二叉决策树：<br>（1）设结点的训练数据集为 $D$，计算现有特征对该数据集的基尼指数。此时，对每一个特征 $A$，对其可能取的每个值 $a$，根据样本点对 $A=a$ 的测试为“是”或“否”将，$D$ 分割成 $D_1$ 和 $D_2$ 两部分，利用式 $\eqref{1}$ 计算 $A=a$ 时的基尼指数。<br>（2）在所有可能的特征A以及它们所有可能的切分点a中，选择基尼指数最小的特征及其对应的切分点作为最优特征与最优切分点。依最优特征与最优切分点，从现结点生成两个子结点，将训练数据集依特征分配到两个子结点中去。<br>（3）对两个子结点递归地调用（1），（2），直至满足停止条件。<br>（4）生成CART决策树。<br>算法停止计算的条件是结点中的样本个数小于预定阈值，或样本集的基尼指数小于预定阈值（样本基本属于同一类），或者没有更多特征。</p>
+<h2 id="Algorithm-5-6-CART-Pruning"><a href="#Algorithm-5-6-CART-Pruning" class="headerlink" title="Algorithm 5.6: CART Pruning"></a>Algorithm 5.6: CART Pruning</h2><ul>
+<li><strong>Input</strong>:     Decision tree $T_0$ generated by CART Algorithm;</li>
+<li><strong>Output</strong>:  Optimal decision tree $T_\alpha$.</li>
+</ul>
+<ol>
+<li><p>Assume $k=0$, $T=T_0$ .</p>
+</li>
+<li><p>Assume $\alpha = +\infty$.</p>
+</li>
+<li><p>For each interval node $t$, calculate $C(T_t)$, $|T_t|$, </p>
+<script type="math/tex; mode=display">
+g(t)=\frac{C(t)-C(T_t)} {|T_t|-1}, \\
+\alpha = \min (\alpha, g(t)).</script></li>
+</ol>
+<p>   where $T_t$ is refer to the subtree which t is the root node, </p>
+<p>   $C(T_t)$ is the prediction error of training data, </p>
+<p>   $|T_t|$ is the number of leaf nodes of $T_t$.</p>
+<ol>
+<li><p>Prune the interval node $t$ of  $g(t) = \alpha$, and the leaf node $t$ decide which class to majority voting method.</p>
+</li>
+<li><p>Assume $k=k+1$, $\alpha_k=\alpha$, $T_k=T$.</p>
+</li>
+<li><p>If $T_k$ is not the tree constitute by root node and two leaf nodes, back to $2.$;</p>
+<p>Otherwise, set $T_k=T_n$.</p>
+</li>
+<li><p>Use Cross-validation choose the optimal subtree $T_\alpha$ in subtree sequence.</p>
+</li>
+</ol>
 
       
     </div>
@@ -576,6 +668,10 @@ g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}</script><ul>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Japanese/EveJap-1/103/" rel="prev" title="みんなの日本語-初級1‐第三課">
+                みんなの日本語-初級1‐第三課 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -649,7 +745,7 @@ g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}</script><ul>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -743,7 +839,7 @@ g_R(D,A) = \frac {g(D,A)} {H_A(D)} \tag{5.6}</script><ul>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">1.1.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵-entropy"><span class="nav-number">1.1.1.</span> <span class="nav-text">熵 entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件熵-conditional-entropy"><span class="nav-number">1.1.2.</span> <span class="nav-text">条件熵 conditional entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益-information-gain"><span class="nav-number">1.1.3.</span> <span class="nav-text">信息增益 information gain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益比-information-gain-ratio"><span class="nav-number">1.1.4.</span> <span class="nav-text">信息增益比 information gain ratio</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征选择"><span class="nav-number">1.1.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#熵-entropy"><span class="nav-number">1.1.1.</span> <span class="nav-text">熵 entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件熵-conditional-entropy"><span class="nav-number">1.1.2.</span> <span class="nav-text">条件熵 conditional entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益-information-gain"><span class="nav-number">1.1.3.</span> <span class="nav-text">信息增益 information gain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益比-information-gain-ratio"><span class="nav-number">1.1.4.</span> <span class="nav-text">信息增益比 information gain ratio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法5-1-ID3-算法"><span class="nav-number">1.2.</span> <span class="nav-text">算法5.1: ID3 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-5-2-C4-5"><span class="nav-number">1.3.</span> <span class="nav-text">Algorithm 5.2: C4.5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-5-3-Decision-Tree-Pruning"><span class="nav-number">1.4.</span> <span class="nav-text">Algorithm 5.3: Decision Tree Pruning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CART算法"><span class="nav-number">2.</span> <span class="nav-text">CART算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CART生成"><span class="nav-number">2.1.</span> <span class="nav-text">CART生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-回归树的生成"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 回归树的生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-分类树的生成"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 分类树的生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-5-6-CART-Pruning"><span class="nav-number">2.2.</span> <span class="nav-text">Algorithm 5.6: CART Pruning</span></a></li></ol></li></ol></div>
             
 
           </div>
