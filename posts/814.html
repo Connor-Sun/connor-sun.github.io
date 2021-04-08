@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"connor-sun.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="遇到一道有趣的题目和有趣的方法：使用Moore 摩尔投票法，线性时间求解 Majority Vote Algorithm 问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="求众数——Moore投票法">
+<meta property="og:url" content="https://connor-sun.github.io/posts/814.html">
+<meta property="og:site_name" content="Connor">
+<meta property="og:description" content="遇到一道有趣的题目和有趣的方法：使用Moore 摩尔投票法，线性时间求解 Majority Vote Algorithm 问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-08T14:03:23.000Z">
+<meta property="article:modified_time" content="2021-04-08T15:18:26.000Z">
+<meta property="article:author" content="Connor Sun">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://connor-sun.github.io/posts/814.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>求众数——Moore投票法 | Connor</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Connor</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Connor的折腾笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://connor-sun.github.io/posts/814.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Connor Sun">
+      <meta itemprop="description" content="人生天地间，无始终者，非君子也。吾来时明白，去时不可不明白。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Connor">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          求众数——Moore投票法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-08 22:03:23 / 修改时间：23:18:26" itemprop="dateCreated datePublished" datetime="2021-04-08T22:03:23+08:00">2021-04-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">遇到一道有趣的题目和有趣的方法：使用Moore 摩尔投票法，线性时间求解 Majority Vote Algorithm 问题。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="求众数-求超过-n2-次的元素"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element/">169. 求众数</a> 求超过 <code>⌊ n/2 ⌋</code> 次的元素</h2>
+<p><code>简单</code></p>
+<p>给定一个大小为 <em>n</em> 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 <strong>大于</strong> <code>⌊ n/2 ⌋</code> 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,3]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[2,2,1,1,1,2,2]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>尝试设计时间复杂度为 O(n)、空间复杂度为 O(1) 的算法解决此问题。</li>
+</ul>
+<h3 id="moore投票法介绍">Moore投票法介绍</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element-ii/solution/mo-er-tou-piao-fa-jin-jie-ban-by-clearboy/">参考</a></p>
+<p>首先我们了解下什么是摩尔投票法:其基于一个事实: 当数组中存在某个数个数大于数组长度的1/2 时，我们可以使用使用摩尔投票法找出这个数。</p>
+<p>算法：设置一个候选人和一个计数器 <code>count</code>。遍历数组，每次遇到和候选人一样的值则 <code>++count</code>，否 则 <code>--count</code> 。当 <code>count == 0</code> 时替换候选人。最后剩下的就是我们所求的众数。</p>
+<p>那么为什么能这样求呢？首先我们可以把数组中的数分为两类：众数和其他数。 算法中遇到和候选人不一样的值进行 <code>--count</code> 时其实可以看成一次互拼。而我们必须要保证这个互拼只有以下2种情况：</p>
+<ol type="1">
+<li>众数和其他数互拼，两者同时消耗1.</li>
+<li>其他数和其他数互拼，其他数消耗2.</li>
+</ol>
+<p>如果我们想要最后剩下的都是众数，那么按照对众数最不利的情况是所有的互拼都是情况1。而由于众数的个数大于 <span class="math inline">\(\lfloor n / 2 \rfloor\)</span>，所以最不利的情况最后留下来的也是众数。</p>
+<p>而在算法中我们保证互拼只有以上2种情况的方法就是：我们遇到相同的候选人则 <code>++count</code>，这样可以避免众数和众数互拼（因为众数肯定是相等的，所以相同的时候 <code>++count</code> 就避免了众数和众数互拼）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 摩尔投票</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> major = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (major == nums[i])</span><br><span class="line">            ++count;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            --count;</span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">0</span>) </span><br><span class="line">                major = nums[i + <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> major;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求众数-ii-求超过-n3-次的元素"><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element-ii/">229. 求众数 II</a> 求超过 <code>⌊ n/3 ⌋</code> 次的元素</h2>
+<p><code>中等</code></p>
+<p>给定一个大小为 <em>n</em> 的整数数组，找出其中所有出现超过 <code>⌊ n/3 ⌋</code> 次的元素。</p>
+<p><strong>进阶：</strong>尝试设计时间复杂度为 O(n)、空间复杂度为 O(1)的算法解决此问题。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,2,3]</span><br><span class="line">输出：[3]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [1]</span><br><span class="line">输出：[1]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,1,1,3,3,2,2,2]</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+</ul>
+<h3 id="moore投票进阶版求超过-n3-次的元素">Moore投票进阶版——求超过 <code>⌊ n/3 ⌋</code> 次的元素</h3>
+<p>区别：</p>
+<ul>
+<li>求超过 <code>⌊ n/3 ⌋</code> 次的元素最多有两个，所以我们可以改变思路寻找两个众数，将三个不同的元素放在一起对碰，具体方法如下：</li>
+</ul>
+<ol type="1">
+<li><p>有别于原版的Moore投票，因为至多可能有两个元素符合要求，所以需要两个元素的值及计数器；</p></li>
+<li><p>比较时首先比较当前元素是否等于两个当前计数的元素，若相等，对应计数器 + 1；</p></li>
+<li><p>若都不相等，分两种情况：</p>
+<ul>
+<li><p>有值为0的计数器</p>
+<p>将更新元素为当前元素，<code>++count</code>；</p></li>
+<li><p>两个计数器均不为0</p>
+<p>两个计数器分别 - 1，三个不同元素一组消消乐。</p></li>
+</ul></li>
+<li><p>最后计数检查留下来的元素出现次数是否符合要求，符合则压入数组。</p></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">majorityElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res1 = nums[<span class="number">0</span>]; </span><br><span class="line">    <span class="keyword">int</span> res2 = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> count1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count2 = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// Moore投票 双候选人版</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == res1)</span><br><span class="line">            ++count1;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i == res2)</span><br><span class="line">            ++count2;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (count1 == <span class="number">0</span>) &#123;</span><br><span class="line">            res1 = i;</span><br><span class="line">            ++count1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (count2 == <span class="number">0</span>) &#123;</span><br><span class="line">            res2 = i;</span><br><span class="line">            ++count2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            --count1;</span><br><span class="line">            --count2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 统计结果的两个元素的出现次数</span></span><br><span class="line">    count1 = <span class="number">0</span>;</span><br><span class="line">    count2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == res1)</span><br><span class="line">            ++count1;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (i == res2)</span><br><span class="line">            ++count2;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 将超过 ⌊ n/3 ⌋ 的元素加入数组</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (count1 &gt; nums.size() / <span class="number">3</span>)</span><br><span class="line">        res.push_back(res1);</span><br><span class="line">    <span class="keyword">if</span> (count2 &gt; nums.size() / <span class="number">3</span>) </span><br><span class="line">        res.push_back(res2);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="moore投票法总结">Moore投票法总结</h2>
+<p>优势：</p>
+<ul>
+<li><span class="math inline">\(O(n)\)</span> 的时间复杂度 <span class="math inline">\(O(1)\)</span> 的空间复杂度</li>
+</ul>
+<p>限制条件：</p>
+<ul>
+<li>限制众数出现的次数要在某个比例之上，且需要提前知道这个比例，若数组中众数出现次数小于这个比例，则不能正常求解。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/29326.html" rel="prev" title="Hexo 报错 can not read a block mapping entry">
+      <i class="fa fa-chevron-left"></i> Hexo 报错 can not read a block mapping entry
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E4%BC%97%E6%95%B0-%E6%B1%82%E8%B6%85%E8%BF%87-n2-%E6%AC%A1%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">169. 求众数 求超过 ⌊ n&#x2F;2 ⌋ 次的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#moore%E6%8A%95%E7%A5%A8%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">Moore投票法介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E4%BC%97%E6%95%B0-ii-%E6%B1%82%E8%B6%85%E8%BF%87-n3-%E6%AC%A1%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">229. 求众数 II 求超过 ⌊ n&#x2F;3 ⌋ 次的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#moore%E6%8A%95%E7%A5%A8%E8%BF%9B%E9%98%B6%E7%89%88%E6%B1%82%E8%B6%85%E8%BF%87-n3-%E6%AC%A1%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">Moore投票进阶版——求超过 ⌊ n&#x2F;3 ⌋ 次的元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moore%E6%8A%95%E7%A5%A8%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">Moore投票法总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Connor Sun"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Connor Sun</p>
+  <div class="site-description" itemprop="description">人生天地间，无始终者，非君子也。吾来时明白，去时不可不明白。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Connor-Sun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Connor-Sun" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sunkang.connor@outlook.com" title="E-Mail → mailto:sunkang.connor@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Connor Sun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>
