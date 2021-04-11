@@ -43,8 +43,9 @@
 <meta property="og:image" content="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411034519755.png">
 <meta property="og:image" content="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411032016180.png">
 <meta property="og:image" content="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411040010043.png">
+<meta property="og:image" content="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411213355324.png">
 <meta property="article:published_time" content="2021-04-10T20:32:03.000Z">
-<meta property="article:modified_time" content="2021-04-10T20:58:41.834Z">
+<meta property="article:modified_time" content="2021-04-11T13:41:01.501Z">
 <meta property="article:author" content="Connor Sun">
 <meta property="article:tag" content="折腾">
 <meta property="article:tag" content="树莓派">
@@ -214,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-11 04:32:03 / 修改时间：04:58:41" itemprop="dateCreated datePublished" datetime="2021-04-11T04:32:03+08:00">2021-04-11</time>
+              <time title="创建时间：2021-04-11 04:32:03 / 修改时间：21:41:01" itemprop="dateCreated datePublished" datetime="2021-04-11T04:32:03+08:00">2021-04-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,18 +243,14 @@
 <h2 id="起因">起因</h2>
 <p>朋友的咖啡店里想用屏幕来显示菜单，相比纸质菜单可以比较方便的调整内容，本来他们准备用手机 <code>Type C</code> 连接屏幕，但这个方案实操了一下感觉非常不优雅。</p>
 <p>思考了下需求只是简单的显示图片就可以了，想起了白嫖来在寝室里闲置很久了的树莓派，在GitHub上发现了 <a target="_blank" rel="noopener" href="https://github.com/nulijiabei/xplay">xplay</a> 这个项目，<a target="_blank" rel="noopener" href="https://gitee.com/nljb/xplay">附gitee地址</a>。简直是为这个需求量身打造，贴张作者的宣传图：</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/logo.jpg" alt="img" /><figcaption aria-hidden="true">img</figcaption>
-</figure>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/logo.jpg" alt="img"  /></p>
 <h2 id="系统安装">系统安装</h2>
 <p>没想到现在树莓派装系统变得比之前更傻瓜了，比用微软官方工具装Windows还简单，打开官方的安装工具后点四下鼠标就可以坐等系统烧录了。</p>
 <h3 id="烧录到内存卡">烧录到内存卡</h3>
 <p>还是大概写一下安装系统的步骤：</p>
 <ol type="1">
 <li><p>打开<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/software/">树莓派官网</a>下载新推出的镜像烧录工具的 <code>.msi</code> 文件，将其安装到自己的电脑；</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411001145412.png" alt="image-20210411001145412" /><figcaption aria-hidden="true">image-20210411001145412</figcaption>
-</figure>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411001145412.png" alt="image-20210411001145412" style="zoom:80%;" /></p>
 <p>我这里是在Windows上安装的，Surface读卡器yyds！</p>
 <p>如果你使用的是 macOS 或 Linux，相信你自己也可以搞定，实在不会问谷歌问百度嘛。</p></li>
 <li><p>傻瓜式安装：</p>
@@ -282,9 +279,7 @@
 <li><p>首先开启树莓派的ssh服务，因为手边有屏幕，所以在图形化界面直接开启 <code>ssh</code> 和 <code>vnc</code>；</p>
 <p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411014132560.png" alt="image-20210411014132560" style="zoom:50%;" /></p></li>
 <li><p>偷懒直接用 Git Bash 连 <code>ssh</code> 了，按照图片指示连接即可； ① 输入用户名及树莓派的IP地址 ② 首次连接需要输入 <code>yes</code> 进行确认 ③ 输入用户名对应密码</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411014801219.png" alt="image-20210411014801219" /><figcaption aria-hidden="true">image-20210411014801219</figcaption>
-</figure></li>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411014801219.png" alt="image-20210411014801219" style="zoom:80%;" /></p></li>
 <li><p>首先设置一下树莓派中的 <code>root</code> 账户： ① <code>sudo passwd root</code> 设置新的 <code>root</code> 密码； ② <code>sudo passwd --unlock root</code> 解锁 <code>root</code> 用户； ③ <code>su root</code> 测试能否进入 <code>root</code> 用户；</p>
 <p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411015740222.png" alt="image-20210411015740222" style="zoom: 67%;" /></p></li>
 <li><p>将安装文件克隆到本地；</p>
@@ -348,9 +343,7 @@
 <p>在刚刚克隆的目录执行下列操作：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> xplay/</span><br><span class="line">$ <span class="built_in">cd</span> buster/ 或 <span class="built_in">cd</span> buster-lite/ </span><br><span class="line">$ sh -x rpi_omx_install.sh 或 sh -x rpi4_drm_install.sh 或 sh -x rpi4_x11_install.sh</span><br></pre></td></tr></table></figure>
 <p>这里我的机器版本是2B，根据表格我选择安装 <code>buster/rpi_omx_install.sh</code>。</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411022837496.png" alt="image-20210411022837496" /><figcaption aria-hidden="true">image-20210411022837496</figcaption>
-</figure></li>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411022837496.png" alt="image-20210411022837496" style="zoom:80%;" /></p></li>
 <li><p>等待安装完成，出现如下信息即表示安装成功。</p>
 <p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411020803452.png" alt="image-20210411020803452" style="zoom:67%;" /></p></li>
 </ol>
@@ -367,9 +360,7 @@
 <blockquote>
 <p>不知道这测试视频为什么是面膜，打的广告吗……</p>
 </blockquote>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411032332334.png" alt="image-20210411032332334" /><figcaption aria-hidden="true">image-20210411032332334</figcaption>
-</figure>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411032332334.png" alt="image-20210411032332334" style="zoom:80%;" /></p>
 <h3 id="图片测试">图片测试</h3>
 <p>使用 <code>scp</code> 命令复制图片到指定路径；</p>
 <p>使用 <code>-welcome</code> 指令显示图片；</p>
@@ -448,9 +439,7 @@
 <li><p>在想要的位置使用新建脚本文件；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano autoPlay.sh</span><br></pre></td></tr></table></figure></li>
 <li><p>进入nano编辑器编辑脚本内容；</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411034519755.png" alt="image-20210411034519755" /><figcaption aria-hidden="true">image-20210411034519755</figcaption>
-</figure></li>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411034519755.png" alt="image-20210411034519755" style="zoom:80%;" /></p></li>
 <li><p>赋予脚本文件可执行权限</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod 777 /home/pi/AetteMenu/autoPlay.sh</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -468,20 +457,46 @@
 </ol>
 <h2 id="目前存在的问题">目前存在的问题</h2>
 <p>root用户：</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411032016180.png" alt="image-20210411032016180" /><figcaption aria-hidden="true">image-20210411032016180</figcaption>
-</figure>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411032016180.png" alt="image-20210411032016180" style="zoom:80%;" /></p>
 <p>pi用户：</p>
-<figure>
-<img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411040010043.png" alt="image-20210411040010043" /><figcaption aria-hidden="true">image-20210411040010043</figcaption>
-</figure>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411040010043.png" alt="image-20210411040010043" style="zoom:80%;" /></p>
 <p><code>-playing</code> 只能播放视频</p>
 <p><code>-welcome</code> 才能显示图片</p>
-<h2 id="更换菜单的方案">更换菜单的方案</h2>
+<h2 id="树莓派自动连接wifi">树莓派自动连接WiFi</h2>
+<p>淘宝随便买了一个免驱的USB无线网卡，毕竟这个场景不需要速度，方便就好。</p>
+<p>因为网卡还没邮到，先在树莓派中预设置一下，希望到了之后可以即插即用。</p>
 <ol type="1">
-<li><p>将图片置于树莓派内，使用ftp更换</p></li>
-<li><p>将图片置于U盘内，直接更换U盘中的文件</p></li>
+<li><p>首先在树莓派中配置WiFi的名称及密码等信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>在打开的文件中写入如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface&#x3D;DIR&#x3D;&#x2F;var&#x2F;run&#x2F;wpa_supplicant GROUP&#x3D;netdev</span><br><span class="line">update_config&#x3D;1</span><br><span class="line"></span><br><span class="line">network&#x3D;&#123;</span><br><span class="line">        ssid&#x3D;&quot;name&quot;</span><br><span class="line">        psk&#x3D;&quot;password&quot;</span><br><span class="line">        key_mgmt&#x3D;WPA-PSK</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>设置固定IP：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/dhcpcd.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>在打开的文件中写入如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># wire:</span><br><span class="line">interface eth0</span><br><span class="line">        static ip_address&#x3D;192.168.2.100&#x2F;24</span><br><span class="line">        static routers&#x3D;192.168.2.1</span><br><span class="line"></span><br><span class="line"># wireless:</span><br><span class="line">interface wlan0</span><br><span class="line">        static ip_address&#x3D;192.168.2.101&#x2F;24</span><br><span class="line">        static routers&#x3D;192.168.2.1</span><br></pre></td></tr></table></figure>
+<p>没有配置默认DNS，只要一个局域网功能，也无所谓了。</p></li>
+<li><p>静待无线网卡。</p></li>
 </ol>
+<h2 id="更换菜单的方案">更换菜单的方案</h2>
+<p>将图片置于U盘内，直接更换U盘中的文件（废弃）</p>
+<p>遇到了蛮多问题，发现这个方案并不是很稳定，故选用FTP来实现。</p>
+<h3 id="将图片置于树莓派内使用ftp更换">将图片置于树莓派内，使用ftp更换</h3>
+<p>使用FIleZilla的图形化界面FTP简单易懂，只是可能树莓派2B没有WLAN模块不是很方便。</p>
+<h3 id="安装vsftpd">安装vsftpd</h3>
+<ol type="1">
+<li><p>安装vsftpd服务器 (约400KB)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install vsftpd</span><br></pre></td></tr></table></figure></li>
+<li><p>启动ftp服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service vsftpd start</span><br></pre></td></tr></table></figure></li>
+<li><p>编辑vsftdp的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
+<p>编辑以下项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable&#x3D;NO </span><br><span class="line"># 表示：不允许匿名访问</span><br><span class="line"></span><br><span class="line">local_enable&#x3D;YES  </span><br><span class="line"># 设定本地用户可以访问</span><br><span class="line"></span><br><span class="line">write_enable&#x3D;YES</span><br><span class="line"># 设定可以进行写操作</span><br><span class="line"></span><br><span class="line">local_umask&#x3D;000</span><br><span class="line"># 设定上传后文件的权限掩码</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="使用filezilla">使用FileZilla</h3>
+<p>FileZilla安装很简单，没什么好说的。</p>
+<p>装好之后打开直接使用，输入树莓派IP地址，用户名密码，FTP默认端口号为21，未更改则不需要特别设置，连接后传输想要的文件即可。</p>
+<p><img src="http://connor-sun-pic.oss-cn-shanghai.aliyuncs.com/imghost/2021/04/11/image-20210411213355324.png" alt="image-20210411213355324"  /></p>
 
     </div>
 
@@ -563,7 +578,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">系统安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%A7%E5%BD%95%E5%88%B0%E5%86%85%E5%AD%98%E5%8D%A1"><span class="nav-number">2.1.</span> <span class="nav-text">烧录到内存卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">初始化设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85xplay"><span class="nav-number">3.</span> <span class="nav-text">安装xplay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">显示测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%AD%E6%94%BE%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">播放测试文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">图片测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">运行参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">5.</span> <span class="nav-text">设置开机自动播放的脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E8%84%9A%E6%9C%AC"><span class="nav-number">5.1.</span> <span class="nav-text">编辑脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">5.2.</span> <span class="nav-text">设置开机自动运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">目前存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E8%8F%9C%E5%8D%95%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">7.</span> <span class="nav-text">更换菜单的方案</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">系统安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%A7%E5%BD%95%E5%88%B0%E5%86%85%E5%AD%98%E5%8D%A1"><span class="nav-number">2.1.</span> <span class="nav-text">烧录到内存卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">初始化设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85xplay"><span class="nav-number">3.</span> <span class="nav-text">安装xplay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">显示测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%AD%E6%94%BE%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">播放测试文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">图片测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">运行参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="nav-number">5.</span> <span class="nav-text">设置开机自动播放的脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E8%84%9A%E6%9C%AC"><span class="nav-number">5.1.</span> <span class="nav-text">编辑脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">5.2.</span> <span class="nav-text">设置开机自动运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">目前存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5wifi"><span class="nav-number">7.</span> <span class="nav-text">树莓派自动连接WiFi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E8%8F%9C%E5%8D%95%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">8.</span> <span class="nav-text">更换菜单的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%9B%BE%E7%89%87%E7%BD%AE%E4%BA%8E%E6%A0%91%E8%8E%93%E6%B4%BE%E5%86%85%E4%BD%BF%E7%94%A8ftp%E6%9B%B4%E6%8D%A2"><span class="nav-number">8.1.</span> <span class="nav-text">将图片置于树莓派内，使用ftp更换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vsftpd"><span class="nav-number">8.2.</span> <span class="nav-text">安装vsftpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8filezilla"><span class="nav-number">8.3.</span> <span class="nav-text">使用FileZilla</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
